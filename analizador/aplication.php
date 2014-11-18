@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require '/proyecto/config.php';
+require 'proyecto/config.php';
         /* Obtener una sesionvalida*/
         $session = $facebook->getUser();
 
