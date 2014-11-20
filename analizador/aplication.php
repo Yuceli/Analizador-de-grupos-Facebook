@@ -83,6 +83,15 @@ require '/proyecto/config.php';
 $gid= '1468449696753793';
 //$gid=$_POST['clave']
 ?>
+
+
+<!-- Aqui empieza el dolor de cabeza -->
+                    <?php
+
+                    $groups=$facebook->api(array('method'=>'fql.query','query'=>"SELECT name, description, privacy, creator, pic_small FROM group WHERE gid='" . $gid."'",));
+
+
+                 ?>
   
  <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -139,7 +148,7 @@ $gid= '1468449696753793';
             </div>
             <!-- /.navbar-collapse -->
         </nav>
-
+ 
 
 
         <div id="page-wrapper">
@@ -149,54 +158,20 @@ $gid= '1468449696753793';
                     <h1>Analizador</h1>
                 </div>
 
+                <div>
+                  <p>Los sistemas desarrollados con herramientas para analizar la interacción son usados para evaluar el proceso de colaboración y mejorar métodos computacionales para apoyar y asistir al proceso de aprendizaje en grupo. 
+                  Facebook por sus características podría ser complementado con una aplicación que nos permita evaluar un grupo en alguna actividad colaborativas.
+                  Lo primero que debemos hacer es haber iniciado sesión en Facebook.</p>
+                </div>
+
                 <div class="row">
                     <div class="col-md-6">
-                        <h3>Nombre:</h3>
-                        <h4>ID de grupo:
-                            <h4>
-                    </div>
-                    <div class="col-md-6">
-                        <form action="indexi.php" method="post" class="form-inline">
-                            <div class="form-group">
-                                <label class="sr-only" for="">ID del Grupo</label>
-                                <input type="number" class="form-control" id="fb-group-id-input" placeholder="Ingrese un id valido">
-                            </div>
-                            <button id="analizar-btn" class="btn btn-primary">Analizar</button>
-                        </form>
+                        <h4>Nombre del grupo: <?php echo $group['name'];?></h4>
+                        <h4>ID de grupo: <?php echo $gid;?></h4>
+                        <h4>Contacto: <?php echo $me['name']; ?></h4>
                     </div>
 
-            <!-- Aqui empieza el dolor de cabeza -->
-                    <?php
-
-                    $groups=$facebook->api(array('method'=>'fql.query','query'=>"SELECT name, description, privacy, creator, pic_small FROM group WHERE gid='" . $gid."'",));
-
-                    '<table>';
-                    '<tr><th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Privacidad</th>
-                    <th>Creador</th>
-                    <th>Foto</td></th>';
-
-                    foreach ($groups as $group){
-                     '<tr><td>'."1".$group['name'].'</td>
-                     <td>'."2".$group['description'].'</td>
-                     <td>'."3".$group['privacy'].'</td>
-                     <td>'."4".$group['creator'].'</td>
-                     <td><img src="'.$group['pic_small'].'"/></td>
-                     </tr>';
-
-                 }
-                 '</table>';
-
-
-
-                 ?>
-
-                 <br><br>
-                 Informacion de los miembros del grupo <strong><?php echo $group['name']; ?></strong> con ID <strong><?php echo $gid; ?></strong>,  administrador por <strong><?php echo $me['name']; ?>  </strong>  
-                 <br><br>
-
-                 <div align="center">
+                 <div class="pull-left">
 
                   <?php
                   $grp_members=$facebook->api(array('method'=>'fql.query','query'=>"SELECT uid, name, pic_square FROM user WHERE uid IN(SELECT uid FROM group_member WHERE gid= '".$gid."')",));
@@ -233,7 +208,7 @@ $gid= '1468449696753793';
   Publicaciones del grupo de Maestria con ID <strong><?php echo $gid; ?></strong> : <br>
   <br>
   <?php
-  $pruebas1 = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, message, actor_id FROM stream WHERE source_id='".$gid."'",));
+  $pruebas1 = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, message, actor_id FROM stream WHERE source_id='".$gid."'"  ,));
   echo '<table>';
   echo '<tr><th>ID de la publicacion</th>
   <th>Mensaje</th>
@@ -293,8 +268,6 @@ echo "<br>";
 <br>
 Comentarios de la ultima publicacion del grupo con ID <strong><?php echo $gid; ?></strong> : <br>
 <br>
-
-
 
 <?php
 $pruebas = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, fromid, text FROM comment WHERE post_id='" . $pru."'",));
@@ -464,6 +437,21 @@ La grafica nos muestra la ultima publicacion del grupo de  <strong><?php echo $c
 
 
 </div>
+
+<?php
+/* PHP SDK v4.0.0 */
+/* make the API call */
+$request = new FacebookRequest(
+  $session,
+  'GET',
+  '/1468449696753793/feed'
+);
+$response = $request->execute();
+$graphObject = $response->getGraphObject();
+/* handle the result */
+
+
+?>
 
   <!-- Aqui <termina></termina> el dolor de cabeza -->
 
