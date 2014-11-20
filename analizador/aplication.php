@@ -1,37 +1,42 @@
 <!DOCTYPE html>
+<meta charset="utf-8">
 <?php
 require '/proyecto/config.php';
-        /* Obtener una sesionvalida*/
-        $session = $facebook->getUser();
 
-        $me = null;
-        $gid=$_POST['clave'];
-        if ($session) {
-            /*checar si la sesion es valida*/
-            try{
-                $me = $facebook->api('/me');
-            } catch (FacebookApiException $e){ }
-        }
-        
-        if ($me) {
+
+/* Obtener una sesionvalida*/
+$session = $facebook->getUser();
+
+$me = null;
+//$gid=$_POST['clave'];
+if ($session) {
+/*checar si la sesion es valida*/
+    try{
+$me = $facebook->api('/me');
+       } catch (FacebookApiException $e){ }
+               }
+  
+  if ($me) {
 //echo 'Usuario ya está está loguiado ó tiene una sesion valida';
 
-        }
-        else {
-            
-            echo 'Sesion expirada o usuario no ha sido logueado aun. redireccionando....';
+ }
+  else {
+        
+        echo 'Sesion expirada o usuario no ha sido logueado aun. redireccionando....';
 
-            echo '<script>top.location.href="'.$facebook->getLoginUrl().'";</script>';
-            
-            $loginUrl = $facebook->getLoginUrl(array('req_perms'=>'manage_friendlists, publish_stream, publish_actions, user_groups, friends_groups'));
-            /** usar el sig codigo para aplcacion frame  */
-            echo '<script> top.location.href="'.$loginUrl.'"; </script>';
-            exit;
-            /** use el sig codigo para aplicaciones de terceros*/
+        echo '<script>top.location.href="'.$facebook->getLoginUrl().'";</script>';
+        
+    $loginUrl = $facebook->getLoginUrl(array('req_perms'=>'manage_friendlists, publish_stream, publish_actions, user_groups, friends_groups'));
+    /** usar el sig codigo para aplcacion frame  */
+    echo '<script> top.location.href="'.$loginUrl.'"; </script>';
+    exit;
+    /** use el sig codigo para aplicaciones de terceros*/
 
     //header ('Location: '.$loginUrl);
-        } 
-        ?>
+    
+  } 
+ ?>
+
 <html lang="en">
 <head>
 
@@ -79,19 +84,12 @@ require '/proyecto/config.php';
 </head>
 
 <body>
- <?php
+
+<?php
 $gid= '1468449696753793';
 //$gid=$_POST['clave']
 ?>
-
-
-<!-- Aqui empieza el dolor de cabeza -->
-                    <?php
-
-                    $groups=$facebook->api(array('method'=>'fql.query','query'=>"SELECT name, description, privacy, creator, pic_small FROM group WHERE gid='" . $gid."'",));
-
-
-                 ?>
+ 
   
  <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -158,11 +156,32 @@ $gid= '1468449696753793';
                     <h1>Analizador</h1>
                 </div>
 
-                <div>
-                  <p>Los sistemas desarrollados con herramientas para analizar la interacción son usados para evaluar el proceso de colaboración y mejorar métodos computacionales para apoyar y asistir al proceso de aprendizaje en grupo. 
-                  Facebook por sus características podría ser complementado con una aplicación que nos permita evaluar un grupo en alguna actividad colaborativas.
-                  Lo primero que debemos hacer es haber iniciado sesión en Facebook.</p>
-                </div>
+                        <?php
+
+         $groups=$facebook->api(array('method'=>'fql.query','query'=>"SELECT name, description, privacy, creator, pic_small FROM group WHERE gid='" . $gid."'",));
+         
+          '<table>';
+         '<tr><th>Nombre</th>
+                  <th>Descripcion</th>
+                  <th>Privacidad</th>
+                  <th>Creador</th>
+                  <th>Foto</td></th>';
+              
+              foreach ($groups as $group){
+         '<tr><td>'."1".$group['name'].'</td>
+                  <td>'."2".$group['description'].'</td>
+                  <td>'."3".$group['privacy'].'</td>
+                  <td>'."4".$group['creator'].'</td>
+                  <td><img src="'.$group['pic_small'].'"/></td>
+              </tr>';
+            
+        }
+         '</table>';
+             
+         
+         
+         ?>
+ 
 
                 <div class="row">
                     <div class="col-md-6">
