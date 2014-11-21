@@ -3,8 +3,7 @@
 <?php
 require '/proyecto/config.php';
 
-
-/* Obtener una sesionvalida*/
+/* Obtener una sesion valida*/
 $session = $facebook->getUser();
 
 $me = null;
@@ -17,17 +16,17 @@ $me = $facebook->api('/me');
                }
   
   if ($me) {
-//echo 'Usuario ya está está loguiado ó tiene una sesion valida';
+//echo 'Usuario ya está está logueado ó tiene una sesion valida';
 
  }
   else {
         
-        echo 'Sesion expirada o usuario no ha sido logueado aun. redireccionando....';
+        echo 'Redireccionando....';
 
         echo '<script>top.location.href="'.$facebook->getLoginUrl().'";</script>';
         
     $loginUrl = $facebook->getLoginUrl(array('req_perms'=>'manage_friendlists, publish_stream, publish_actions, user_groups, friends_groups'));
-    /** usar el sig codigo para aplcacion frame  */
+    /** usar el sig codigo para aplicacion frame  */
     echo '<script> top.location.href="'.$loginUrl.'"; </script>';
     exit;
     /** use el sig codigo para aplicaciones de terceros*/
@@ -46,7 +45,7 @@ $me = $facebook->api('/me');
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Analizador de grupos Facebook</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -78,13 +77,10 @@ $me = $facebook->api('/me');
     <script src="js/plugins/morris/morris.min.js"></script>
     <script src="js/plugins/morris/morris-data.js"></script>
     <script src="js/app.js"></script>
-
-
-
 </head>
 
-<body>
 
+<body>
 <?php
 $gid= '1468449696753793';
 //$gid=$_POST['clave']
@@ -128,19 +124,13 @@ $gid= '1468449696753793';
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Aplicación</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Graficás</a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tablas</a>
                     </li>
                 </ul>
             </div>
@@ -155,9 +145,7 @@ $gid= '1468449696753793';
                 <div class="page-header">
                     <h1>Analizador</h1>
                 </div>
-
-                        <?php
-
+         <?php
          $groups=$facebook->api(array('method'=>'fql.query','query'=>"SELECT name, description, privacy, creator, pic_small FROM group WHERE gid='" . $gid."'",));
          
           '<table>';
@@ -189,294 +177,123 @@ $gid= '1468449696753793';
                         <h4>ID de grupo: <?php echo $gid;?></h4>
                         <h4>Contacto: <?php echo $me['name']; ?></h4>
                     </div>
+               </div>     
+                    <br>
 
-                 <div class="pull-left">
-
-                  <?php
-                  $grp_members=$facebook->api(array('method'=>'fql.query','query'=>"SELECT uid, name, pic_square FROM user WHERE uid IN(SELECT uid FROM group_member WHERE gid= '".$gid."')",));
-     $id_nom[50][2]="";// LIMITADO A 50 USUARIOS
-     $i=0;
-     $j=0;
-     $con_member=0;
-     echo '<table>';
-     echo '<tr>
-     <th>No.</th>
-     <th>ID USER</th>
-     <th>NOMBRE</th>
-     <th>FOTO DE PERFIL</th></tr>';
-
-
-     foreach ($grp_members as $grp_member){
-
-      $con_member++;
-      $id_nom[$i][0]= $grp_member['uid'];
-      $id_nom[$i][1]= $grp_member['name'];
-
-      echo '<tr>
-      <td>'.$con_member.'</td>
-      <td>'.$grp_member['uid'].'</td>
-      <td>'.$grp_member['name'].'</td>
-      <td><img src="'.$grp_member['pic_square'].'"/></td></tr>';
-
-      $i=$i+1;
-  }
-  echo '</table>';
-  ?>
-  <br>
-  <br>
-  Publicaciones del grupo de Maestria con ID <strong><?php echo $gid; ?></strong> : <br>
-  <br>
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive"> 
+        <h3>Tabla de miembros</h3>  
   <?php
-  $pruebas1 = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, message, actor_id FROM stream WHERE source_id='".$gid."'"  ,));
-  echo '<table>';
-  echo '<tr><th>ID de la publicacion</th>
-  <th>Mensaje</th>
-  <th>Actor</th>
-  </tr>';
-  $var[50][1]="";
-  $ctronombre[50]="";
-  $x=0;
-  foreach ($pruebas1 as $prueba1){
+  $grp_members=$facebook->api(array('method'=>'fql.query','query'=>"SELECT uid, name, pic_square FROM user WHERE uid IN(SELECT uid FROM group_member WHERE gid= '".$gid."')",));
+   $id_nom[50][2]="";// LIMITADO A 50 USUARIOS
+   $i=0;
+   $j=0;
+   $con_member=0;
+
+  
+                  
+                      echo'<table class="table table-bordered">';
+                        echo'<tr>
+                          <td>No. de usuario</td>
+                          <td>ID de usuario</td>
+                          <td>Nombre</td>
+                          <td>Foto de perfil</td>
+                        </tr>';
+
+                        foreach ($grp_members as $grp_member){
+                        $con_member++;
+                        $id_nom[$i][0]= $grp_member['uid'];
+                        $id_nom[$i][1]= $grp_member['name'];
+
+
+                          echo '<tr>
+                          <td>'.$con_member.'</td>
+                          <td>'.$grp_member['uid'].'</td>
+                          <td>'.$grp_member['name'].'</td>
+                          <td><img src="'.$grp_member['pic_square'].'"/></td></tr>';
+                          $i=$i+1;
+                          }
+                      echo '</table>';
+                      ?>
+                      
+        </div>
+    </div>
+</div>
+<!--Finaliza tabla de miembros-->
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="table table-responsive">
+      <h3>Tabla de publicaciones</h3>
+      <?php
+      $pruebas1 = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, message, actor_id FROM stream WHERE source_id='".$gid."'",));
+        echo'<table class="table table-bordered">';
+        echo'<tr>
+        <td>ID de publicación</td>
+        <td>Mensaje</td>
+        <td>Actor</td>
+        <tr>';
+        $var[50][1]="";
+$ctronombre[50]="";
+$x=0;
+foreach ($pruebas1 as $prueba1){
     $var[$x][0]= $prueba1['post_id'];
-    $var[$x][1]= $prueba1['actor_id'];
-    $ctronombre[$x] =buscar_nombre($var[$x][1],$id_nom);
-    $x=$x+1;
-    echo '<tr><td>'.$prueba1['post_id'].'</td>
-    <td>'.$prueba1['message'].'</td>
-    <td>'.$prueba1['actor_id'].'</td>
-    </tr>';
+      $var[$x][1]= $prueba1['actor_id'];
+      $ctronombre[$x] =buscar_nombre($var[$x][1],$id_nom);
+      $x=$x+1;
+echo '<tr><td>'.$prueba1['post_id'].'</td>
+          <td>'.$prueba1['message'].'</td>
+          <td>'.$prueba1['actor_id'].'</td>
+      </tr>';
 }
-echo '</table>';
+        echo'</table>';
 
-    //tomo y guardo en una variable array el id compuesto post mas reciente, tengo que tomar la segunda parte de para enviarlo en mi sig consulta.
+        //tomo y guardo en una variable array el id compuesto post mas reciente, tengo que tomar la segunda parte de para enviarlo en mi sig consulta.
 
 echo "<br>";
-    $longitud = strlen("$gid")+1;// quitar hasta el gin en la clave id de la publicacion
-    //echo "Variable ofelia: ".$pru1= substr($var[0][0],$longitud)."<br>";
-    echo "<br>";
-
-
-    ?>
-    <?php
-    //$vectorVariable[2] = substr($var[0],$longitud);
-    $pru= substr($var[3][0],$longitud);// Tomo la ultima publicacion
-
-    //$pru= '240618486127599';
-
-
-
-    function buscar_nombre($buscar,$_idnom) {
-
-      $i=0;
-
-      while($i<50) {
-          if ($buscar==$_idnom[$i][0]){
-           $ctro_graf =  $_idnom[$i][1];
-           return $ctro_graf;
-       } 
-       $i++;
-   } 
-
-}
-
+$longitud = strlen("$gid")+1;// quitar hasta el gin en la clave id de la publicacion
+//echo "Variable ofelia: ".$pru1= substr($var[0][0],$longitud)."<br>";
 echo "<br>";
 
 
 ?>
 
-<br>
-Comentarios de la ultima publicacion del grupo con ID <strong><?php echo $gid; ?></strong> : <br>
-<br>
+ <?php
+//$vectorVariable[2] = substr($var[0],$longitud);
+//$pru= substr($var[3][0],$longitud);// Tomo la ultima publicacion
 
-<?php
-$pruebas = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, fromid, text FROM comment WHERE post_id='" . $pru."'",));
-
-
-
-echo '<table>';
-echo '<tr><th>ID del POST</th>
-<th>ID de quien Comento</th>
-<th>Comentario</th>
-</tr>';
-$actor_comen[50]="";
-$nombre[50]="";
-
-$z=0; 
-
-foreach ($pruebas as $prueba){
-  $actor_comen[$z]= $prueba['fromid'];
-  $nombre[$z] =buscar_nombre($actor_comen[$z],$id_nom);
-  $z=$z+1;
-
-
-  echo '<tr>
-  <td>'.$prueba['post_id'].'</td>
-  <td>'.$prueba['fromid'].'</td>
-  <td>'.$prueba['text'].'</td>
-  </tr>';
-}
-echo '</table>';
-$lista_simple = array_values(array_unique($nombre));
-$result = count($lista_simple)-1
-
-
-?>
-
-</div>
-<br>
-La grafica nos muestra la ultima publicacion del grupo de  <strong><?php echo $ctronombre[0]; ?></strong> y solo <strong><?php echo $result; ?></strong> miembros han comentado de <strong><?php echo $con_member; ?></strong>
-<br>
+$pru= '287611711428276';
 
 
 
+ function buscar_nombre($buscar,$_idnom) {
+
+  $i=0;
+
+while($i<50) {
+  if ($buscar==$_idnom[$i][0]){
+ $ctro_graf =  $_idnom[$i][1];
+    return $ctro_graf;
+    } 
+   $i++;
+           } 
+ 
+                                          }
+
+echo "<br>";
 
 
-<div>
-
-    <?php
-    $links1[100]=" ";
-    $o=0;
-    foreach ($ctronombre as $ctro){
-
-        foreach ($nombre as $nom){
-
-
-            $o=$o+1;
-
-        }
-
-    }
-    //var_dump($links1);
-
-    ?>
-
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script>
-
-
-
-    // http://blog.thomsonreuters.com/index.php/mobile-patent-suits-graphic-of-the-day/
-    var links = [
-    {source: "<?php echo $ctronombre[0]; ?>", target: "<?php echo $nombre[0]; ?>", type: "licensing"},
-    {source: "<?php echo $ctronombre[0]; ?>", target: "<?php echo $nombre[1]; ?>", type: "licensing"},
-    {source: "<?php echo $ctronombre[0]; ?>", target: "<?php echo $nombre[2]; ?>", type: "licensing"},
-    {source: "<?php echo $ctronombre[0]; ?>", target: "<?php echo $nombre[3]; ?>", type: "licensing"},
-    {source: "<?php echo $ctronombre[0]; ?>", target: "<?php echo $nombre[4]; ?>", type: "licensing"},
-    {source: "<?php echo $ctronombre[1]; ?>", target: "sin comentario", type: "resolved"},
-    {source: "<?php echo $ctronombre[2]; ?>", target: "sin comentario", type:"resolved"},
-    {source: "<?php echo $ctronombre[3]; ?>", target: "sin comentario", type: "resolved"},
-    {source: "<?php echo $ctronombre[4]; ?>", target: "sin comentario", type: "resolved"},
-    {source: "<?php echo $ctronombre[5]; ?>", target: "sin comentario", type: "resolved"},
-    {source: "<?php echo $ctronombre[6]; ?>", target: "sin comentario", type: "resolved"},
-
-
-
-     // {source: "", target: "Virginia", type: "resolved"},
-
-     
-    //  {source: "Nokia", target: "Pablo", type: "suit"}
-    ];
-
-    var nodes = {};
-
-    // Compute the distinct nodes from the links.
-    links.forEach(function(link) {
-      link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
-      link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
-  });
-
-    var width = 960,
-    height = 500;
-
-    var force = d3.layout.force()
-    .nodes(d3.values(nodes))
-    .links(links)
-    .size([width, height])
-    .linkDistance(60)
-    .charge(-300)
-    .on("tick", tick)
-    .start();
-
-    var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-    // Per-type markers, as they don't inherit styles.
-    svg.append("defs").selectAll("marker")
-    .data(["suit", "licensing", "resolved"])
-    .enter().append("marker")
-    .attr("id", function(d) { return d; })
-    .attr("viewBox", "0 -5 10 10")
-    .attr("refX", 15)
-    .attr("refY", -1.5)
-    .attr("markerWidth", 6)
-    .attr("markerHeight", 6)
-    .attr("orient", "auto")
-    .append("path")
-    .attr("d", "M0,-5L10,0L0,5");
-
-    var path = svg.append("g").selectAll("path")
-    .data(force.links())
-    .enter().append("path")
-    .attr("class", function(d) { return "link " + d.type; })
-    .attr("marker-end", function(d) { return "url(#" + d.type + ")"; });
-
-    var circle = svg.append("g").selectAll("circle")
-    .data(force.nodes())
-    .enter().append("circle")
-    .attr("r", 6)
-    .call(force.drag);
-
-    var text = svg.append("g").selectAll("text")
-    .data(force.nodes())
-    .enter().append("text")
-    .attr("x", 8)
-    .attr("y", ".31em")
-    .text(function(d) { return d.name; });
-
-    // Use elliptical arc path segments to doubly-encode directionality.
-    function tick() {
-      path.attr("d", linkArc);
-      circle.attr("transform", transform);
-      text.attr("transform", transform);
-  }
-
-  function linkArc(d) {
-      var dx = d.target.x - d.source.x,
-      dy = d.target.y - d.source.y,
-      dr = Math.sqrt(dx * dx + dy * dy);
-      return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
-  }
-
-  function transform(d) {
-      return "translate(" + d.x + "," + d.y + ")";
-  }
-
-  </script>
-
-
+ ?>
+      
+    </div>
+  </div>
 </div>
 
-<?php
-/* PHP SDK v4.0.0 */
-/* make the API call */
-$request = new FacebookRequest(
-  $session,
-  'GET',
-  '/1468449696753793/feed'
-);
-$response = $request->execute();
-$graphObject = $response->getGraphObject();
-/* handle the result */
+<!--Finaliza tabla de comentarios-->
 
-
-?>
-
-  <!-- Aqui <termina></termina> el dolor de cabeza -->
-
-
-
-
+                     
                 </div>
 
 
@@ -505,5 +322,4 @@ $graphObject = $response->getGraphObject();
     <script src="js/app.js"></script> -->
 
 </body>
-
 </html>
