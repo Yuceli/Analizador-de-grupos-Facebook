@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <?php
-require '/proyecto/config.php';
+require 'proyecto/config.php';
 
 /* Obtener una sesion valida*/
 $session = $facebook->getUser();
@@ -154,6 +154,8 @@ $gid= '1468449696753793';
                   <th>Privacidad</th>
                   <th>Creador</th>
                   <th>Foto</td></th>';
+
+                  '<tbody>';
               
               foreach ($groups as $group){
          '<tr><td>'."1".$group['name'].'</td>
@@ -164,6 +166,7 @@ $gid= '1468449696753793';
               </tr>';
             
         }
+        '</tbody>';
          '</table>';
              
          
