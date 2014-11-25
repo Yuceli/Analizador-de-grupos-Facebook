@@ -48,7 +48,7 @@ $me = $facebook->api('/me');
     <title>Analizador de grupos Facebook</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
@@ -97,7 +97,6 @@ $gid= '1468449696753793';
 
     <div id="wrapper">
 
-        <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -109,28 +108,48 @@ $gid= '1468449696753793';
                 </button>
                 <a class="navbar-brand" href="index.html">Analizador</a>
             </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="#">Contacto</a>
+                    </li>
+                    <li>
+                        <a href="#">Ayuda</a>
+                    </li>
+                    <li class="">
+                        <a href="inicio.html">Ir a aplicacion</a>
+                    </li>
+                    <li class="">
+                        <p id="fb-username" class="navbar-text">
+                    </p>
+                    </li>
+                <li>
+                    <a class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true" perms="read_stream, publish_stream, manage_friendlists, publish_stream, publish_actions, user_groups, friends_groups"></a>
+                </li>
+                </ul>
+            </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="active">
-                    <p id="fb-username" class="navbar-text">
-                    </p>
-                </li>
-                <li>
-                    <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true" perms="read_stream, publish_stream, manage_friendlists, publish_stream, publish_actions, user_groups, friends_groups"></div>
-
-                </li>
+               
             </ul>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="inicio.html"><i class="fa fa-fw fa-dashboard"></i> Introducción</a>
+                    </li>
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Aplicación</a>
+                        <a href="aplication.php"><i class="fa fa-fw fa-bar-chart-o"></i> Análisis de grupo</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Graficás</a>
+                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Análisis grupal</a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tablas</a>
+                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Analizador estandar</a>
                     </li>
                 </ul>
             </div>
