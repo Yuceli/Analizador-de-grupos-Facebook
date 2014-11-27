@@ -141,10 +141,10 @@ $gid= '1468449696753793';
                         <a href="aplication.php"><i class="fa fa-fw fa-bar-chart-o"></i> Análisis de grupo</a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Análisis grupal</a>
+                        <a href="tables.php"><i class="fa fa-fw fa-table"></i> Análisis grupal</a>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Analizador estandar</a>
+                        <a href="estandar.html"><i class="fa fa-fw fa-edit"></i> Analizador estandar</a>
                     </li>
                 </ul>
             </div>
@@ -157,7 +157,7 @@ $gid= '1468449696753793';
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="page-header">
-                    <h1>Analizador</h1>
+                    <h1>Análisis de grupo</h1>
                 </div>
          <?php
          $groups=$facebook->api(array('method'=>'fql.query','query'=>"SELECT name, description, privacy, creator, pic_small FROM group WHERE gid='" . $gid."'",));
@@ -247,34 +247,48 @@ $gid= '1468449696753793';
 <!--Finaliza tabla de miembros-->
 
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="table table-responsive">
-      <h3>Tabla de publicaciones</h3>
-      <?php
-      $pruebas1 = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, message, actor_id FROM stream WHERE source_id='".$gid."'",));
-        echo'<table class="table table-bordered">';
-        echo'<tr>
-        <td>ID de publicación</td>
-        <td>Mensaje</td>
-        <td>Actor</td>
-        <tr>';
-        $var[50][1]="";
-$ctronombre[50]="";
-$x=0;
-foreach ($pruebas1 as $prueba1){
-    $var[$x][0]= $prueba1['post_id'];
-      $var[$x][1]= $prueba1['actor_id'];
-      $ctronombre[$x] =buscar_nombre($var[$x][1],$id_nom);
-      $x=$x+1;
-echo '<tr><td>'.$prueba1['post_id'].'</td>
-          <td>'.$prueba1['message'].'</td>
-          <td>'.$prueba1['actor_id'].'</td>
-      </tr>';
-}
-        echo'</table>';
 
-        //tomo y guardo en una variable array el id compuesto post mas reciente, tengo que tomar la segunda parte de para enviarlo en mi sig consulta.
+
+<div class="row">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h3 class="panel-title">Tabla de publicaciones</h3>
+                <div class="pull-right">
+                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtro</button>
+                </div>
+            </div>
+             <?php
+             $pruebas1 = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, message, actor_id FROM stream WHERE source_id='".$gid."'",));
+
+            echo'<table class="table">';
+                echo '<thead>
+                    <tr class="filters">
+                        <th><input type="text" class="form-control" placeholder="ID de publicación" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Mensaje" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Actor" disabled></th>
+                    </tr>
+                    </thead>';
+
+
+                    $var[50][1]="";
+                    $ctronombre[50]="";
+                    $x=0;
+                    foreach ($pruebas1 as $prueba1){
+                      $var[$x][0]= $prueba1['post_id'];
+                      $var[$x][1]= $prueba1['actor_id'];
+                      $ctronombre[$x] =buscar_nombre($var[$x][1],$id_nom);
+                      $x=$x+1;
+
+
+                   echo'<tr>
+                        <td>'.$prueba1['post_id'].'</td>
+                        <td>'.$prueba1['message'].'</td>
+                        <td>'.$prueba1['actor_id'].'</td>
+                    </tr>';
+                          }
+               echo'</tbody>';
+            echo'</table>';
+            //tomo y guardo en una variable array el id compuesto post mas reciente, tengo que tomar la segunda parte de para enviarlo en mi sig consulta.
 
 echo "<br>";
 $longitud = strlen("$gid")+1;// quitar hasta el gin en la clave id de la publicacion
@@ -284,7 +298,8 @@ echo "<br>";
 
 ?>
 
- <?php
+
+<?php
 //$vectorVariable[2] = substr($var[0],$longitud);
 //$pru= substr($var[3][0],$longitud);// Tomo la ultima publicacion
 
@@ -292,7 +307,7 @@ $pru= '287611711428276';
 
 
 
- function buscar_nombre($buscar,$_idnom) {
+function buscar_nombre($buscar,$_idnom) {
 
   $i=0;
 
@@ -310,40 +325,16 @@ echo "<br>";
 
 
  ?>
-      
-    </div>
-  </div>
+</div>
 </div>
 
-<!--Finaliza tabla de comentarios-->
 
-                     
-                </div>
+</div>
+</div>
+<!-- /.container-fluid -->
 
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-
-
-   
-    <!-- /#wrapper -->
-
-    <!-- jQuery Version 1.11.0 -->
-    <!-- <script src="js/jquery-1.11.0.js"></script> -->
-
-    <!-- Bootstrap Core JavaScript -->
-    <!-- <script src="js/bootstrap.min.js"></script> -->
-
-    <!-- Morris Charts JavaScript -->
-    <!-- <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>-->
-    
-
+</div>
+<!-- /#page-wrapper -->
+</div>
 </body>
 </html>

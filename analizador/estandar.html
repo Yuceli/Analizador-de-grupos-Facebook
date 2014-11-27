@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="utf-8">
@@ -16,9 +17,6 @@
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
-    <link href="css/plugins/morris.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -27,31 +25,21 @@
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+    <![endif]-->
 
-    <!-- jQuery Version 1.11.0 -->
-    <script src="js/jquery-1.11.0.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
-    <script src="js/app.js"></script>
 </head>
 
 <body>
- <script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=593740170716314";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
-    <div id="wrapper">
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=593740170716314";
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+     <div id="wrapper">
 
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -114,81 +102,44 @@
         </nav>
 
 
-
         <div id="page-wrapper">
+
             <div class="container-fluid">
+
                 <!-- Page Heading -->
-                <div class="page-header">
-                    <h1>Analizador</h1>
-                </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <p>Los sistemas desarrollados con herramientas para analizar la interacción son usados para evaluar el proceso de colaboración y mejorar métodos computacionales para apoyar y asistir al proceso de aprendizaje en grupo. 
-                          Facebook por sus características podría ser complementado con una aplicación que nos permita evaluar un grupo en alguna actividad colaborativas.</p>
-
-                      </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                            <ul class="nav nav-pills nav-justified thumbnail">
-                                <li><a href="#">
-                                    <h4 class="list-group-item-heading">Paso 1</h4>
-                                    <p class="list-group-item-text">Iniciar sesión en Facebook</p>
-                                </a></li>
-                                <li class="active"><a href="#">
-                                    <h4 class="list-group-item-heading">Paso 2</h4>
-                                    <p class="list-group-item-text">Ser administrador de un grupo público en Facebook</p>
-                                </a></li>
-                                <li class=""><a href="#">
-                                    <h4 class="list-group-item-heading">Paso 3</h4>
-                                    <p class="list-group-item-text">Identificar el ID del grupo en Facebook</p>
-                                </a></li>
-                            </ul>
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Forms
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-edit"></i> Forms
+                            </li>
+                        </ol>
                     </div>
                 </div>
+                <!-- /.row -->
 
-                <br>
+               
 
-                <div class="row">
+            </div>
+            <!-- /.container-fluid -->
 
-                    <div class="alert alert-info">
-                        <strong>Info:</strong> Si usted ya introdujo el ID y ha inicio sesión en la aplicación podra navegar sobre cualquier opción de la aplicación.
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <h5>Introduzca el ID del grupo de Facebook.</h5>
-                        <form action="aplication.php" method="post" class="form-inline">
-                            <div class="form-group">
-                                <label class="sr-only" for="">ID del Grupo</label>
-                                <input type="text" name="clave" class="form-control" placeholder="Ingrese un ID valido"  required>
-                                <!--<input type="text" class="form-control" id="fb-group-id-input" placeholder="Ingrese un id valido">-->
-                            </div>
-                            <input type="submit" name="Enviar" class="btn btn-primary">
-                        </form>
-                    </div>
-                </div> 
-            </div>  
         </div>
+        <!-- /#page-wrapper -->
 
-
-
-   
+    </div>
     <!-- /#wrapper -->
 
     <!-- jQuery Version 1.11.0 -->
-    <!-- <script src="js/jquery-1.11.0.js"></script> -->
+    <script src="js/jquery-1.11.0.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <!-- <script src="js/bootstrap.min.js"></script> -->
-
-    <!-- Morris Charts JavaScript -->
-    <!-- <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
-    <script src="js/app.js"></script> -->
+    <script src="js/bootstrap.min.js"></script>
 
 </body>
 
