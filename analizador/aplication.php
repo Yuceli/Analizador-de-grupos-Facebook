@@ -14,17 +14,17 @@ if ($session) {
 $me = $facebook->api('/me');
        } catch (FacebookApiException $e){ }
                }
-  
+
   if ($me) {
 //echo 'Usuario ya está está logueado ó tiene una sesion valida';
 
  }
   else {
-        
+
         echo 'Redireccionando....';
 
         echo '<script>top.location.href="'.$facebook->getLoginUrl().'";</script>';
-        
+
     $loginUrl = $facebook->getLoginUrl(array('req_perms'=>'manage_friendlists, publish_stream, publish_actions, user_groups, friends_groups'));
     /** usar el sig codigo para aplicacion frame  */
     echo '<script> top.location.href="'.$loginUrl.'"; </script>';
@@ -32,8 +32,8 @@ $me = $facebook->api('/me');
     /** use el sig codigo para aplicaciones de terceros*/
 
     //header ('Location: '.$loginUrl);
-    
-  } 
+
+  }
  ?>
 
 <html lang="en">
@@ -82,11 +82,11 @@ $me = $facebook->api('/me');
 
 <body>
 <?php
-$gid= '1468449696753793';
-//$gid=$_POST['clave']
+//$gid= '1468449696753793';
+$gid=$_POST['clave']
 ?>
- 
-  
+
+
  <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -107,7 +107,7 @@ $gid= '1468449696753793';
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Analizador</a>
+                <a class="navbar-brand" href="inicio.html">Analizador</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -136,7 +136,7 @@ $gid= '1468449696753793';
             </div>
             <!-- /.navbar-collapse -->
         </nav>
- 
+
 
 
         <div id="page-wrapper">
@@ -147,7 +147,7 @@ $gid= '1468449696753793';
                 </div>
          <?php
          $groups=$facebook->api(array('method'=>'fql.query','query'=>"SELECT name, description, privacy, creator, pic_small FROM group WHERE gid='" . $gid."'",));
-         
+
           '<table>';
          '<tr><th>Nombre</th>
                   <th>Descripcion</th>
@@ -156,7 +156,7 @@ $gid= '1468449696753793';
                   <th>Foto</td></th>';
 
                   '<tbody>';
-              
+
               foreach ($groups as $group){
          '<tr><td>'."1".$group['name'].'</td>
                   <td>'."2".$group['description'].'</td>
@@ -164,15 +164,15 @@ $gid= '1468449696753793';
                   <td>'."4".$group['creator'].'</td>
                   <td><img src="'.$group['pic_small'].'"/></td>
               </tr>';
-            
+
         }
         '</tbody>';
          '</table>';
-             
-         
-         
+
+
+
          ?>
- 
+
 
                 <div class="row">
                     <div class="col-md-6">
@@ -180,13 +180,13 @@ $gid= '1468449696753793';
                         <h4>ID de grupo: <?php echo $gid;?></h4>
                         <h4>Contacto: <?php echo $me['name']; ?></h4>
                     </div>
-               </div>     
+               </div>
                     <br>
 
 <div class="row">
     <div class="col-md-12">
-        <div class="table-responsive"> 
-        <h3>Tabla de miembros</h3>  
+        <div class="table-responsive">
+        <h3>Tabla de miembros</h3>
   <?php
   $grp_members=$facebook->api(array('method'=>'fql.query','query'=>"SELECT uid, name, pic_square FROM user WHERE uid IN(SELECT uid FROM group_member WHERE gid= '".$gid."')",));
    $id_nom[50][2]="";// LIMITADO A 50 USUARIOS
@@ -194,8 +194,8 @@ $gid= '1468449696753793';
    $j=0;
    $con_member=0;
 
-  
-                  
+
+
                       echo'<table class="table table-bordered">';
                         echo'<tr>
                           <td>No. de usuario</td>
@@ -219,7 +219,7 @@ $gid= '1468449696753793';
                           }
                       echo '</table>';
                       ?>
-                      
+
         </div>
     </div>
 </div>
@@ -231,7 +231,7 @@ $gid= '1468449696753793';
     <div class="table table-responsive">
       <h3>Tabla de publicaciones</h3>
       <?php
-      $pruebas1 = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, message, actor_id FROM stream WHERE source_id='".$gid."'",));
+      $pruebas1 = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, message, actor_id FROM stream WHERE source_id='$gid'",));
         echo'<table class="table table-bordered">';
         echo'<tr>
         <td>ID de publicación</td>
@@ -279,24 +279,24 @@ while($i<50) {
   if ($buscar==$_idnom[$i][0]){
  $ctro_graf =  $_idnom[$i][1];
     return $ctro_graf;
-    } 
+    }
    $i++;
-           } 
- 
+           }
+
                                           }
 
 echo "<br>";
 
 
  ?>
-      
+
     </div>
   </div>
 </div>
 
 <!--Finaliza tabla de comentarios-->
 
-                     
+
                 </div>
 
 
@@ -309,7 +309,7 @@ echo "<br>";
     </div>
 
 
-   
+
     <!-- /#wrapper -->
 
     <!-- jQuery Version 1.11.0 -->
