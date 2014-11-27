@@ -283,7 +283,7 @@ $gid= '1468449696753793';
                    echo'<tr>
                         <td>'.$prueba1['post_id'].'</td>
                         <td>'.$prueba1['message'].'</td>
-                        <td>'.$prueba1['actor_id'].'</td>
+                        <td>'.$grp_member['name'].'</td>
                     </tr>';
                           }
                echo'</tbody>';
