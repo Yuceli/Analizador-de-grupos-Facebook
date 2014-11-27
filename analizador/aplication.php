@@ -58,16 +58,11 @@ $me = $facebook->api('/me');
 
     <!-- Custom Fonts -->
     <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <!-- jQuery Version 1.11.0 -->
     <script src="js/jquery-1.11.0.js"></script>
+    <script src="js/table.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -76,7 +71,7 @@ $me = $facebook->api('/me');
     <script src="js/plugins/morris/raphael.min.js"></script>
     <script src="js/plugins/morris/morris.min.js"></script>
     <script src="js/plugins/morris/morris-data.js"></script>
-    <script src="js/app.js"></script>
+      
 </head>
 
 
@@ -199,46 +194,56 @@ $gid= '1468449696753793';
                </div>     
                     <br>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="table-responsive"> 
-        <h3>Tabla de miembros</h3>  
-  <?php
+
+
+        
+ <!--Comienza tabla de miembros-->  
+    <div class="row">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h3 class="panel-title">Tabla de miembros</h3>
+                <div class="pull-right">
+                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtro</button>
+                </div>
+            </div>
+             <?php
   $grp_members=$facebook->api(array('method'=>'fql.query','query'=>"SELECT uid, name, pic_square FROM user WHERE uid IN(SELECT uid FROM group_member WHERE gid= '".$gid."')",));
    $id_nom[50][2]="";// LIMITADO A 50 USUARIOS
    $i=0;
    $j=0;
    $con_member=0;
 
-  
-                  
-                      echo'<table class="table table-bordered">';
-                        echo'<tr>
-                          <td>No. de usuario</td>
-                          <td>ID de usuario</td>
-                          <td>Nombre</td>
-                          <td>Foto de perfil</td>
-                        </tr>';
+    
 
-                        foreach ($grp_members as $grp_member){
+            echo'<table class="table">';
+                echo '<thead>
+                    <tr class="filters">
+                        <th><input type="text" class="form-control" placeholder="#" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="ID de usuario" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Nombre" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Foto de perfil" disabled></th>
+                    </tr>
+                    </thead>';
+
+
+                    foreach ($grp_members as $grp_member){
                         $con_member++;
                         $id_nom[$i][0]= $grp_member['uid'];
                         $id_nom[$i][1]= $grp_member['name'];
 
 
-                          echo '<tr>
-                          <td>'.$con_member.'</td>
-                          <td>'.$grp_member['uid'].'</td>
-                          <td>'.$grp_member['name'].'</td>
-                          <td><img src="'.$grp_member['pic_square'].'"/></td></tr>';
-                          $i=$i+1;
+                   echo'<tr>
+                        <td>'.$con_member.'</td>
+                        <td>'.$grp_member['uid'].'</td>
+                        <td>'.$grp_member['name'].'</td>
+                        <td><img src="'.$grp_member['pic_square'].'"/></td>
+                    </tr>';
+                     $i=$i+1;
                           }
-                      echo '</table>';
-                      ?>
-                      
+               echo'</tbody>';
+            echo'</table>'?>
         </div>
     </div>
-</div>
 <!--Finaliza tabla de miembros-->
 
 
@@ -337,8 +342,8 @@ echo "<br>";
     <!-- Morris Charts JavaScript -->
     <!-- <script src="js/plugins/morris/raphael.min.js"></script>
     <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
-    <script src="js/app.js"></script> -->
+    <script src="js/plugins/morris/morris-data.js"></script>-->
+    
 
 </body>
 </html>
