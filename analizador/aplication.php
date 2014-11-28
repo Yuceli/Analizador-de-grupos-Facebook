@@ -248,6 +248,7 @@ $gid= '1468449696753793';
 
 
 
+
 <div class="row">
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
@@ -258,7 +259,7 @@ $gid= '1468449696753793';
             </div>
              <?php
              $pruebas1 = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, message, actor_id FROM stream WHERE source_id='".$gid."'",));
-             
+
             echo'<table class="table">';
                 echo '<thead>
                     <tr class="filters">
@@ -278,7 +279,6 @@ $gid= '1468449696753793';
                       $ctronombre[$x] =buscar_nombre($var[$x][1],$id_nom);
                       $x=$x+1;
 
-                     
 
                    echo'<tr>
                         <td>'.$prueba1['post_id'].'</td>
@@ -296,13 +296,10 @@ $longitud = strlen("$gid")+1;// quitar hasta el gin en la clave id de la publica
 echo "<br>";
 
 
-// Yuceli hizo algo mal aquí
  $idComment = explode("_", $prueba1['post_id']);
                       echo $idComment[0];
                       echo'<br>';
                       echo $idComment[1];
-
-
 
 ?>
 
@@ -333,12 +330,11 @@ echo "<br>";
 
 
  ?>
-
 </div>
-  </div>
+</div>
 
 
- <!--Comienza tabla de miembros-->  
+!--Comienza tabla de miembros-->  
     <div class="row">
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
@@ -377,11 +373,6 @@ echo "<br>";
         </div>
     </div>
 <!--Finaliza tabla de miembros-->
-
-
- 
-</div>
-</div>
 
 
 </div>
