@@ -259,7 +259,7 @@ $gid= '1468449696753793';
             </div>
              <?php
              $pruebas1 = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, message, actor_id FROM stream WHERE source_id='".$gid."'",));
-
+             
             echo'<table class="table">';
                 echo '<thead>
                     <tr class="filters">
@@ -279,6 +279,11 @@ $gid= '1468449696753793';
                       $ctronombre[$x] =buscar_nombre($var[$x][1],$id_nom);
                       $x=$x+1;
 
+                      $idComment = explode("_", $prueba1['post_id']);
+                      echo'<br>';
+                      $string_idComment = strval($idComment[1]);
+                      echo ($string_idComment);
+
 
                    echo'<tr>
                         <td>'.$prueba1['post_id'].'</td>
@@ -295,11 +300,6 @@ $longitud = strlen("$gid")+1;// quitar hasta el gin en la clave id de la publica
 //echo "Variable ofelia: ".$pru1= substr($var[0][0],$longitud)."<br>";
 echo "<br>";
 
-
- $idComment = explode("_", $prueba1['post_id']);
-                      echo $idComment[0];
-                      echo'<br>';
-                      echo $idComment[1];
 
 ?>
 
@@ -334,7 +334,7 @@ echo "<br>";
 </div>
 
 
-!--Comienza tabla de miembros-->  
+<!--Comienza tabla de comentarios-->  
     <div class="row">
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
@@ -344,7 +344,7 @@ echo "<br>";
                 </div>
             </div>
              <?php        
-  $comment_member =$facebook->api(array('method' => 'fql.query','query' =>"SELECT text, fromid FROM comment WHERE post_id=1491102147821881"));
+  $comment_member =$facebook->api(array('method' => 'fql.query','query' =>"SELECT text, fromid FROM comment WHERE post_id=$string_idComment"));
         
             echo'<table class="table">';
                 echo '<thead>
