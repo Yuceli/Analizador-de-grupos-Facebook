@@ -248,7 +248,6 @@ $gid= '1468449696753793';
 
 
 
-
 <div class="row">
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
@@ -259,7 +258,7 @@ $gid= '1468449696753793';
             </div>
              <?php
              $pruebas1 = $facebook->api(array('method'=> 'fql.query','query'=> "SELECT post_id, message, actor_id FROM stream WHERE source_id='".$gid."'",));
-
+             
             echo'<table class="table">';
                 echo '<thead>
                     <tr class="filters">
@@ -279,6 +278,7 @@ $gid= '1468449696753793';
                       $ctronombre[$x] =buscar_nombre($var[$x][1],$id_nom);
                       $x=$x+1;
 
+                     
 
                    echo'<tr>
                         <td>'.$prueba1['post_id'].'</td>
@@ -294,6 +294,14 @@ echo "<br>";
 $longitud = strlen("$gid")+1;// quitar hasta el gin en la clave id de la publicacion
 //echo "Variable ofelia: ".$pru1= substr($var[0][0],$longitud)."<br>";
 echo "<br>";
+
+
+// Yuceli hizo algo mal aquí
+ $idComment = explode("_", $prueba1['post_id']);
+                      echo $idComment[0];
+                      echo'<br>';
+                      echo $idComment[1];
+
 
 
 ?>
@@ -325,6 +333,53 @@ echo "<br>";
 
 
  ?>
+
+</div>
+  </div>
+
+
+ <!--Comienza tabla de miembros-->  
+    <div class="row">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h3 class="panel-title">Tabla de comentarios</h3>
+                <div class="pull-right">
+                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtro</button>
+                </div>
+            </div>
+             <?php        
+  $comment_member =$facebook->api(array('method' => 'fql.query','query' =>"SELECT text, fromid FROM comment WHERE post_id=1491102147821881"));
+        
+            echo'<table class="table">';
+                echo '<thead>
+                    <tr class="filters">
+                        <th><input type="text" class="form-control" placeholder="Publicación" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="ID Publicación" disabled></th>
+                    </tr>
+                    </thead>';
+
+
+                    foreach ($comment_member as $comment_member){
+                        $id_nom[$i][1]= $comment_member['fromid'];
+                        $id_nom[$i][0]= $comment_member['text'];
+                        
+
+
+
+                   echo'<tr>
+                        <td>'.$comment_member['fromid'].'</td>
+                        <td>'.$comment_member['text'].'</td>
+                        
+                    </tr>';
+                          }
+               echo'</tbody>';
+            echo'</table>'?>
+        </div>
+    </div>
+<!--Finaliza tabla de miembros-->
+
+
+ 
 </div>
 </div>
 
