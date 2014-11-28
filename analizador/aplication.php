@@ -266,6 +266,7 @@ $gid= '1468449696753793';
                         <th><input type="text" class="form-control" placeholder="ID de publicación" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Mensaje" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Actor" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Comentario" disabled></th>
                     </tr>
                     </thead>';
 
@@ -280,10 +281,21 @@ $gid= '1468449696753793';
                       $x=$x+1;
 
                       $idComment = explode("_", $prueba1['post_id']);
-                      echo'<br>';
                       $string_idComment = strval($idComment[1]);
-                      echo ($string_idComment);
+                      
 
+                      $comment_member =$facebook->api(array('method' => 'fql.query','query' =>"SELECT text, fromid FROM comment WHERE post_id=$string_idComment"));
+                      
+
+                     foreach ($comment_member as $comment_member){
+                        $id_nom[$i][1]= $comment_member['fromid'];
+                        $id_nom[$i][0]= $comment_member['text'];
+                        
+
+
+
+                   echo'<td>'.$comment_member['text'].'</td>';
+                          }
 
                    echo'<tr>
                         <td>'.$prueba1['post_id'].'</td>
@@ -343,7 +355,8 @@ echo "<br>";
                     <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtro</button>
                 </div>
             </div>
-             <?php        
+             <?php   
+
   $comment_member =$facebook->api(array('method' => 'fql.query','query' =>"SELECT text, fromid FROM comment WHERE post_id=$string_idComment"));
         
             echo'<table class="table">';
