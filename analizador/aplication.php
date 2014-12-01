@@ -140,7 +140,7 @@ $gid=$_GET['gid'];
                         <a href="<?php echo "tables.php?gid=$gid" ?>"><i class="fa fa-fw fa-table"></i> Análisis grupal</a>
                     </li>
                     <li>
-                        <a href="estandar.html"><i class="fa fa-fw fa-edit"></i> Analizador estandar</a>
+                        <a href="#"><i class="fa fa-fw fa-edit"></i> Analizador estandar</a>
                     </li>
                 </ul>
             </div>

@@ -78,7 +78,7 @@
                         <a href="#">Ayuda</a>
                     </li>
                     <li class="">
-                        <a href="inicio.html">Ir a aplicacion</a>
+                        <a href="#">Ir a aplicacion</a>
                     </li>
                     <li class="">
                         <p id="fb-username" class="navbar-text">
@@ -103,10 +103,10 @@
                         <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Análisis de grupo</a>
                     </li>
                     <li>
-                        <a href="tables.php"><i class="fa fa-fw fa-table"></i> Análisis grupal</a>
+                        <a href="#"><i class="fa fa-fw fa-table"></i> Análisis grupal</a>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Analizador estandar</a>
+                        <a href="#"><i class="fa fa-fw fa-edit"></i> Analizador estandar</a>
                     </li>
                 </ul>
             </div>

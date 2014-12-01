@@ -107,7 +107,7 @@ else {
             <a href="#">Ayuda</a>
           </li>
           <li class="">
-            <a href="inicio.html">Ir a aplicacion</a>
+            <a href="inicio.php">Ir a aplicacion</a>
           </li>
           <li class="">
             <p id="fb-username" class="navbar-text">
@@ -126,7 +126,7 @@ else {
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li>
-            <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Introducción</a>
+            <a href="inicio.php"><i class="fa fa-fw fa-dashboard"></i> Introducción</a>
           </li>
           <li>
             <a href="<?php echo "aplication.php?gid=$gid" ?>"><i class="fa fa-fw fa-bar-chart-o"></i> Análisis de grupo</a>
@@ -135,7 +135,7 @@ else {
             <a href="<?php echo "tables.php?gid=$gid" ?>"><i class="fa fa-fw fa-table"></i> Análisis grupal</a>
           </li>
           <li>
-            <a href="estandar.html"><i class="fa fa-fw fa-edit"></i> Analizador estandar</a>
+            <a href="#"><i class="fa fa-fw fa-edit"></i> Analizador estandar</a>
           </li>
         </ul>
       </div>
