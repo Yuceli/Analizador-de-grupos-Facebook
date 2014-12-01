@@ -1,6 +1,3 @@
-
-var dataIndicador = [];
-
 var numeroEstudiantes = 0;
 
 $(document).ready(function() {
