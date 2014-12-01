@@ -63,7 +63,8 @@ $me = $facebook->api('/me');
     <script src="js/table.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>S
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/aplication.js"></script>
 
 </head>
 
@@ -71,7 +72,9 @@ $me = $facebook->api('/me');
 <body>
 <?php
 //$gid= '1468449696753793';
-$gid=$_POST['clave'];
+// $gid=$_POST['clave'];
+
+$gid=$_GET['gid'];
 ?>
 
 
@@ -109,7 +112,7 @@ $gid=$_POST['clave'];
                         <a href="#">Ayuda</a>
                     </li>
                     <li class="">
-                        <a href="inicio.html">Ir a aplicacion</a>
+                        <a href="inicio.php">Ir a aplicacion</a>
                     </li>
                     <li class="">
                         <p id="fb-username" class="navbar-text">
@@ -128,10 +131,10 @@ $gid=$_POST['clave'];
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="inicio.html"><i class="fa fa-fw fa-dashboard"></i> Introducción</a>
+                        <a href="inicio.php"><i class="fa fa-fw fa-dashboard"></i> Introducción</a>
                     </li>
                     <li class="active">
-                        <a href="aplication.php"><i class="fa fa-fw fa-bar-chart-o"></i> Análisis de grupo</a>
+                        <a href="<?php echo "aplication.php?gid=$gid" ?>"><i class="fa fa-fw fa-bar-chart-o"></i> Análisis de grupo</a>
                     </li>
                     <li>
                         <a href="<?php echo "tables.php?gid=$gid" ?>"><i class="fa fa-fw fa-table"></i> Análisis grupal</a>
@@ -259,9 +262,10 @@ $gid=$_POST['clave'];
                         <th><input type="text" class="form-control" placeholder="ID de publicación" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Mensaje" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Actor" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Comentario" disabled></th>
+                        
                     </tr>
                     </thead>';
+                    echo'<tbody>';
 
 
                     $var[50][1]="";
@@ -277,21 +281,21 @@ $gid=$_POST['clave'];
                       $string_idComment = strval($idComment[1]);
 
 
-                      $comment_member =$facebook->api(array('method' => 'fql.query','query' =>"SELECT text, fromid FROM comment WHERE post_id=$string_idComment"));
+                     //  $comment_member =$facebook->api(array('method' => 'fql.query','query' =>"SELECT text, fromid FROM comment WHERE post_id=$string_idComment"));
 
 
-                     foreach ($comment_member as $comment_member){
-                        $id_nom[$i][1]= $comment_member['fromid'];
-                        $id_nom[$i][0]= $comment_member['text'];
+                     // foreach ($comment_member as $comment_member){
+                     //    $id_nom[$i][1]= $comment_member['fromid'];
+                     //    $id_nom[$i][0]= $comment_member['text'];
 
 
 
 
-                   echo'<td>'.$comment_member['text'].'</td>';
-                          }
+                   // echo'<td>'.$comment_member['text'].'</td>';
+                          // }
 
-                   echo'<tr>
-                        <td>'.$prueba1['post_id'].'</td>
+                   echo'<tr class="post-row">
+                        <td id="post-id">'.$prueba1['post_id'].'</td>
                         <td>'.$prueba1['message'].'</td>
                         <td>'.$prueba1['actor_id'].'</td>
                     </tr>';
@@ -357,25 +361,25 @@ echo "<br>";
             echo'<table class="table">';
                 echo '<thead>
                     <tr class="filters">
-                        <th><input type="text" class="form-control" placeholder="Publicación" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="ID Publicación" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="ID Actor" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Comentario" disabled></th>
                     </tr>
                     </thead>';
+                  echo'<tbody id="coments-body">';
+
+                   //  foreach ($comment_member as $comment_member){
+                   //      $id_nom[$i][1]= $comment_member['fromid'];
+                   //      $id_nom[$i][0]= $comment_member['text'];
 
 
-                    foreach ($comment_member as $comment_member){
-                        $id_nom[$i][1]= $comment_member['fromid'];
-                        $id_nom[$i][0]= $comment_member['text'];
 
 
+                   // echo'<tr>
+                   //      <td>'.$comment_member['fromid'].'</td>
+                   //      <td>'.$comment_member['text'].'</td>
 
-
-                   echo'<tr>
-                        <td>'.$comment_member['fromid'].'</td>
-                        <td>'.$comment_member['text'].'</td>
-
-                    </tr>';
-                          }
+                   //  </tr>';
+                   //        }
                echo'</tbody>';
             echo'</table>'?>
         </div>

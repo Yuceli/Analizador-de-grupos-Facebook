@@ -91,7 +91,7 @@
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-               
+
             </ul>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -123,7 +123,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <p>Los sistemas desarrollados con herramientas para analizar la interacción son usados para evaluar el proceso de colaboración y mejorar métodos computacionales para apoyar y asistir al proceso de aprendizaje en grupo. 
+                        <p>Los sistemas desarrollados con herramientas para analizar la interacción son usados para evaluar el proceso de colaboración y mejorar métodos computacionales para apoyar y asistir al proceso de aprendizaje en grupo.
                           Facebook por sus características podría ser complementado con una aplicación que nos permita evaluar un grupo en alguna actividad colaborativas.</p>
 
                       </div>
@@ -160,22 +160,22 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h5>Introduzca el ID del grupo de Facebook.</h5>
-                        <form action="aplication.php" method="post" class="form-inline">
+                        <form action="aplication.php" method="GET" class="form-inline">
                             <div class="form-group">
                                 <label class="sr-only" for="">ID del Grupo</label>
-                                <input type="text" name="clave" class="form-control" placeholder="Ingrese un ID valido"  required>
+                                <input type="text" name="gid" class="form-control" placeholder="Ingrese un ID valido"  required>
                                 <!--<input type="text" class="form-control" id="fb-group-id-input" placeholder="Ingrese un id valido">-->
                             </div>
                             <input type="submit" name="Enviar" class="btn btn-primary">
                         </form>
                     </div>
-                </div> 
-            </div>  
+                </div>
+            </div>
         </div>
 
 
 
-   
+
     <!-- /#wrapper -->
 
     <!-- jQuery Version 1.11.0 -->

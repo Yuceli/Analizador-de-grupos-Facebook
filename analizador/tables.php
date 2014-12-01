@@ -129,7 +129,7 @@ else {
             <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Introducción</a>
           </li>
           <li>
-            <a href="inicio.html"><i class="fa fa-fw fa-bar-chart-o"></i> Análisis de grupo</a>
+            <a href="<?php echo "aplication.php?gid=$gid" ?>"><i class="fa fa-fw fa-bar-chart-o"></i> Análisis de grupo</a>
           </li>
           <li class="active">
             <a href="<?php echo "tables.php?gid=$gid" ?>"><i class="fa fa-fw fa-table"></i> Análisis grupal</a>
